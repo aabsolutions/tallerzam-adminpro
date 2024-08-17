@@ -1,0 +1,124 @@
+<!-- <div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input type="text"
+                        class="form-control"
+                        placeholder="Buscar usuario..."
+                        (keyup)="buscar(txtBusqueda.value)"
+                        #txtBusqueda/>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<form class="form p-t-20" 
+      [formGroup]="seleccionForm">
+    <div class="row animated fadeIn fast">
+        <div class="col-12">
+            <h6 class="card-subtitle mb-2">Filtros de búsqueda:</h6>    
+            <div class="form-group row">
+                
+                <div class="col-6">
+                    <div class="input-group">
+                        <div class="input-group-addon">Jornada:</div>
+                            <select class="form-control" 
+                                formControlName="jornada"
+                                (change)="cambiaJornada()">
+                                <option selected value="0">Seleccione la jornada...</option>
+                                <option value="1">MATUTINA</option>
+                                <option value="2">VESPERTINA</option>
+                                <option value="3">NOCTURNA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group">
+                            <div class="input-group-addon">Nivel:</div>
+                                <select class="form-control"
+                                    formControlName="nivel"
+                                    (change)="cargarCursos()">
+                                    <option value="0" selected>Seleccione...</option>
+                                    <option *ngFor="let nivel of niveles, index as i" value="{{i+1}}">{{nivel}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+</form>
+
+<div class="row animated fadeIn fast"
+    *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div *ngIf="nivelUsuario=='ADMIN_ROLE'" class="row">
+                    <div class="col">
+                        <div class="text-right mb-3">
+                            <a class="btn btn-primary"
+                             routerLink="/dashboard/curso/nuevo">
+                                <i class="fa fa-hospital-o"></i>
+                                Crear curso
+                            </a>
+                        </div>    
+                    </div>
+                 </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Grado</th>
+                                <th>Nivel</th>
+                                <th>Paralelo</th>
+                                <th>Jornada</th>
+                                <th>Especialidad</th>
+                                <!-- <th>Orden</th> -->
+                                <th class="text-nowrap w100">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let curso of cursos; index as i">
+                                <td>{{i+1}}</td>
+                                <td>{{curso.grado}}</td>
+                                <td>{{curso.nivel}}</td>
+                                <td>{{curso.paralelo}}</td>
+                                <td>{{curso.jornada}}</td>
+                                <td *ngIf="curso.especialidad">{{curso.especialidad}}</td>
+                                <td *ngIf="!curso.especialidad"></td>
+                                <!-- <td *ngIf="curso.orden">{{curso.orden}}</td>
+                                <td *ngIf="!curso.orden">0</td> -->
+                                <td class="text-nowrap text-center">
+                                    <a *ngIf="nivelUsuario=='ADMIN_ROLE'" [routerLink]="['/dashboard/curso', curso._id]" 
+                                       data-toggle="tooltip" 
+                                       data-original-title="Edit">
+                                       <i class="fa fa-pencil text-inverse m-r-10"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- <div *ngIf="txtBusqueda.value.length===0">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
+                    &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
+                </div>                 -->
+            </div>
+        </div>
+    </div>
+</div>
