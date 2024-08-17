@@ -10,12 +10,16 @@ import { ComponentsModule } from '../components/components.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { SharedModule } from '../shared/shared.module';
 import { ProductoComponent } from './mantenimientos/productos/producto.component';
+import { RegistroComponent } from './mantenimientos/usuarios/registro.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ProductoComponent,
-    PagesComponent,
+    RegistroComponent,
+    UsuariosComponent,
+    PagesComponent
   ],
   exports: [
     DashboardComponent,
