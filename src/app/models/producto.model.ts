@@ -25,6 +25,7 @@ export class Producto{
         public unidad: string,
         public tipo_repuesto: _ProductoTipoRepuesto,
         public proveedor: _ProductoProveedor,
+        public _id?: string,
         public codigo?: string,
         public modelo?: string,
         public marca?: string,

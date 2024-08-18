@@ -20,10 +20,9 @@ import Swal from 'sweetalert2';
 export class ProductoComponent implements OnInit {
 
   public productoForm: FormGroup;
-
   public productoSeleccionado: Producto;
-
   public imgSubs: Subscription;
+  public usuarioRegistro: string;
 
   public tipos_repuesto: any[] = 
   [
@@ -38,6 +37,19 @@ export class ProductoComponent implements OnInit {
     {
       id: '66bc1ba9c5a6ba76068a81c1',
       descripcion: 'REPUESTO ELECTRÓNICO'
+    }
+  ]
+
+  
+  public proveedores: any[] = 
+  [
+    {
+      id: '66bac42873a2a91304a46aa5',
+      razon_social: 'CHEVROLET ECUADOR S.A.'
+    },
+    {
+      id: '66bac5b23d965a7bddde4bb9',
+      razon_social: 'MAZDA ECUADOR S.A.'
     }
   ]
 
@@ -83,13 +95,12 @@ export class ProductoComponent implements OnInit {
 
     this._productoService.cargarProductoPorId(id)
         .subscribe( (producto: Producto) => {
-
           if( !producto ){
             return this.router.navigateByUrl(`/dashboard`);
           }
 
           this.productoSeleccionado = producto;
-          console.log(producto.matricula);
+          console.log(this.productoSeleccionado);
           this.productoForm.setValue({
             codigo: this.productoSeleccionado.codigo||'',
             costo: this.productoSeleccionado.costo||'',
@@ -101,63 +112,52 @@ export class ProductoComponent implements OnInit {
             observacion: this.productoSeleccionado.observacion||'',
             precio: this.productoSeleccionado.precio||'',
             procedencia: this.productoSeleccionado.procedencia||'',
-            proveedor: this.productoSeleccionado.proveedor||'',
+            proveedor: this.productoSeleccionado.proveedor._id||'',
             stock: this.productoSeleccionado.stock||'',
             stock_minimo: this.productoSeleccionado.stock_minimo||'',
             tipo_repuesto: this.productoSeleccionado.tipo_repuesto||'',
             unidad: this.productoSeleccionado.unidad||''
-          });       
+          });
+          this.usuarioRegistro = this.productoSeleccionado.usuario.nombre;
           return true;
         }
       )
   }
 
-  // guardarCurso(){
+  guardarProducto(){
+    if(this.productoSeleccionado){
+      const pid = this.productoSeleccionado._id;
+      const data = {
+        _id: pid,
+        ...this.productoForm.value,        
+      }
 
-  //   const { 
-  //       grado,
-  //       nivel,
-  //       paralelo,
-  //       jornada,
-  //       especialidad 
-  //   } = this.cursoForm.value;
+      console.log(data);
 
-  //   var grado_abrev = ''
-  //   //enum: ['8VO', '9NO', '10MO', '1ER BACH.', '2DO BACH.', '3ER BACH.'],
-  //   switch (grado) {
-  //     case '8VO GRADO':
-  //       grado_abrev = '8VO'
-  //       break;
-  //     case '9NO GRADO':
-  //       grado_abrev = '9NO'
-  //       break;
-  //     case '10MO GRADO':
-  //       grado_abrev = '10MO'
-  //       break;
-  //     case '1ER CURSO':
-  //       grado_abrev = '1ER BACH.'
-  //       break;
-  //     case '2DO CURSO':
-  //       grado_abrev = '2DO BACH.'
-  //       break;
-  //     case '3ER CURSO':
-  //       grado_abrev = '3ER BACH.'
-  //       break;
-  //   }
+      this._productoService.actualizarProducto(data)
+        .subscribe(
+          (resp: any) => {
+            Swal.fire('Creado', `El producto ha sido actualizado correctamente`, 'success');
+            this.router.navigateByUrl(`/dashboard`);
+          },
+          (err) => {
+            Swal.fire('Error', err.error.msg, 'error' );
+          }
+        )
+    }else{
 
-  //   var nivel_abrev = ''
-
-  //   switch (nivel) {
-  //     case 'EGB SUPERIOR':
-  //       nivel_abrev = 'EGB SUP.'
-  //       break;
-  //     case 'BACHILLERATO GENERAL UNIFICADO':
-  //       nivel_abrev = 'BGU'
-  //       break;
-  //     case 'BACHILLERATO TECNICO':
-  //       nivel_abrev = 'BT'
-  //       break;
-  //   }
+        this._productoService.crearProducto(this.productoForm.value)
+        .subscribe(
+          (resp: any) => {
+            Swal.fire('Creado', `El producto ha sido creado correctamente`, 'success');
+            this.router.navigateByUrl(`/dashboard`);
+          },
+          (err) => {
+            Swal.fire('Error', err.error.msg, 'error' );
+          }
+        )
+      }    
+    }
 
   //   if(this.cursoSeleccionado){
   //     const cid = this.cursoSeleccionado._id;
@@ -194,8 +194,6 @@ export class ProductoComponent implements OnInit {
   //       }
   //     )
   //   }    
-  // }
-
   // abrirModal(estudiante: Estudiante){
   //   this.modalImagenSrv.abrirModal('clientes',estudiante._id, estudiante.img_secure_url)
   // }

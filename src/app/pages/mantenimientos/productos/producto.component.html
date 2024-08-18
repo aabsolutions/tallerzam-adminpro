@@ -4,7 +4,8 @@
             <div class="card-body">
                 <h4 class="m-b-0 text-white">Datos de producto</h4>
                 <form class="form-horizontal p-t-20" 
-                      [formGroup]="productoForm">
+                      [formGroup]="productoForm"
+                      (submit)="guardarProducto()">
                     <div class="form-body">
                         <!--/section data-->
                         <h3 class="box-title">Información general</h3>
@@ -31,6 +32,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="matricula">
+                                                <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                          </div>
                                 </div>
                             </div>
@@ -42,6 +44,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="descripcion">
+                                                <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                         </div>
                                 </div>
                             </div>
@@ -60,7 +63,8 @@
                                             <option value="">--seleccione--</option>
                                             <option *ngFor="let tipo of tipos_repuesto" value="{{tipo.id}}">{{tipo.descripcion}}</option>
                                         </select>
-                                        </div>
+                                        <small class="form-control-feedback text-danger"> Obligatorio. </small>
+                                    </div>
                                 </div>
                             </div>
                             <!--/span-->
@@ -114,7 +118,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="stock">
-                                        
+                                                <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +129,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="stock_minimo">
-                                       
+                                                <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                     </div>
                                 </div>
                             </div>
@@ -138,6 +142,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="costo">
+                                                <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                     </div>
                                 </div>
                             </div>
@@ -149,6 +154,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="precio">
+                                                <small class="form-control-feedback text-success"> Obligatorio. </small>
                                     </div>
                                 </div>
                             </div>
@@ -162,6 +168,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="unidad">
+                                                <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                         
                                     </div>
                                 </div>
@@ -174,11 +181,9 @@
                                                 formControlName="proveedor"
                                                 data-placeholder="--seleccione--">
                                             <option value="">--seleccione--</option>
-                                            <option value="PROVEEDOR 1">PROVEEDOR 1</option>
-                                            <option value="PROVEEDOR 2">PROVEEDOR 2</option>
-                                            <option value="PROVEEDOR 3">PROVEEDOR 3</option>
+                                            <option *ngFor="let proveedor of proveedores" value="{{proveedor.id}}">{{proveedor.razon_social}}</option>
                                         </select>
-                                       
+                                        <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +196,7 @@
                         <div class="col-md-12">
                             <div class="row text-right">
                                 <div class="col-md-offset-3 col-md">
-                                    Última modificación por <span class="label label-danger">Nombre del usuario</span>
+                                    Última modificación por <span class="label label-danger">{{usuarioRegistro}}</span>
                                 </div>
                             </div>
                         </div>

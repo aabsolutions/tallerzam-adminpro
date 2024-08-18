@@ -67,17 +67,17 @@ export class ProductoService {
   //     )
   // }
 
-  // crearEstudiante( estudiante: Estudiante )
-  // {
-  //   const url = `${ base_url}/estudiantes`;
-  //   return this.http.post(url, estudiante , this.headers );
-  // }
+  crearProducto( producto: Producto )
+  {
+    const url = `${ base_url}/productos`;
+    return this.http.post(url, producto , this.headers );
+  }
 
-  // actualizarEstudiante( estudiante: Estudiante )
-  // {
-  //   const url = `${ base_url}/estudiantes/${estudiante._id}`;
-  //   return this.http.put(url, estudiante, this.headers );
-  // }
+  actualizarProducto( producto: Producto )
+  {
+    const url = `${ base_url}/productos/${producto._id}`;
+    return this.http.put(url, producto, this.headers );
+  }
 
   // asignarEstudianteCurso( idEstudiante: string, idCurso: string, idMatricula?:string)
   // {
