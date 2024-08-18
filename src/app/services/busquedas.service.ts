@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Usuario } from '../models/usuario.model';
+import { Producto } from '../models/producto.model';
 
 const base_url = environment.base_url;
 
@@ -34,6 +35,16 @@ export class BusquedasService {
     );
   }
 
+  private transformarProductos( resultados: any[]): Producto[]{
+    return resultados.map(
+      //hay que tener presente el orden en el que se traen los datos desde el modelo
+      producto => new Producto(producto.matricula, producto.descripcion, producto.stock, producto.stock_minimo, producto.costo,
+        producto.precio, producto.unidad, producto.tipo_repuesto, producto.proveedor, producto._id, producto.codigo, producto.modelo, producto.marca, 
+        producto.procedencia, producto.img, producto.observacion, producto.usuario, producto.estado)
+    );
+  }
+
+
 
   
   buscarTodo(  termino: string){
@@ -42,7 +53,7 @@ export class BusquedasService {
       return this.http.get(url, this.headers )
   }
 
-  buscar( tipo: 'usuarios'|'estudiantes_por_asignar'|'estudiantes_matriculados'|'temas', termino: string){
+  buscar( tipo: 'usuarios'|'productos', termino: string){
     const url = `${base_url}/busqueda/${ tipo }/${termino}`;
     return this.http.get<any[]>(url, this.headers )
       .pipe( 
@@ -52,6 +63,8 @@ export class BusquedasService {
           switch (tipo) {
             case 'usuarios':
               return this.transformarUsuarios(resp.data);
+            case 'productos':
+                return this.transformarProductos(resp.data);
             default:
               return[];
           }

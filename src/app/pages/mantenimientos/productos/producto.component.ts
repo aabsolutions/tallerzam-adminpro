@@ -86,8 +86,6 @@ export class ProductoComponent implements OnInit {
     });
   }
 
-
-
   cargarProducto( id: string ){
     if(id === 'nuevo'){
       return;
@@ -138,7 +136,7 @@ export class ProductoComponent implements OnInit {
         .subscribe(
           (resp: any) => {
             Swal.fire('Creado', `El producto ha sido actualizado correctamente`, 'success');
-            this.router.navigateByUrl(`/dashboard`);
+            this.router.navigateByUrl(`/dashboard/productos/administracion`);
           },
           (err) => {
             Swal.fire('Error', err.error.msg, 'error' );
@@ -150,7 +148,7 @@ export class ProductoComponent implements OnInit {
         .subscribe(
           (resp: any) => {
             Swal.fire('Creado', `El producto ha sido creado correctamente`, 'success');
-            this.router.navigateByUrl(`/dashboard`);
+            this.router.navigateByUrl(`/dashboard/productos/administracion`);
           },
           (err) => {
             Swal.fire('Error', err.error.msg, 'error' );
@@ -158,42 +156,7 @@ export class ProductoComponent implements OnInit {
         )
       }    
     }
-
-  //   if(this.cursoSeleccionado){
-  //     const cid = this.cursoSeleccionado._id;
-  //     const data = {
-  //       _id: cid,
-  //       grado_abrev,
-  //       nivel_abrev,
-  //       ...this.cursoForm.value,        
-  //     }
-  
-  //     this.cursoService.actualizarCurso(data)
-  //         .subscribe(
-  //           resp => {
-  //             Swal.fire('Actualizado', `El curso ha sido actualizado correctamente`, 'success');
-  //             this.router.navigateByUrl(`/dashboard/cursos`);
-  //           }
-  //         )
-  //   }else{
  
-  //   const data = {
-  //     grado_abrev,
-  //     nivel_abrev,
-  //     ...this.cursoForm.value        
-  //   }
-
-  //   this.cursoService.crearCurso(data)
-  //     .subscribe(
-  //       (resp: any) => {
-  //         Swal.fire('Creado', `El curso ha sido creado correctamente`, 'success');
-  //         this.router.navigateByUrl(`/dashboard/cursos`);
-  //       },
-  //       (err) => {
-  //         Swal.fire('Error', err.error.msg, 'error' );
-  //       }
-  //     )
-  //   }    
   // abrirModal(estudiante: Estudiante){
   //   this.modalImagenSrv.abrirModal('clientes',estudiante._id, estudiante.img_secure_url)
   // }

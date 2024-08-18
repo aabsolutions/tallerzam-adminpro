@@ -4,12 +4,12 @@ import { Subscription, delay } from 'rxjs';
 
 import Swal from 'sweetalert2';
 
-import { Curso } from '../../../models/curso.model';
-
 import { BusquedasService } from '../../../services/busquedas.service';
-import { CursoService } from '../../../services/curso.service';
+import { ProductoService } from '../../../services/producto.service';
 import { ModalImagenService } from '../../../services/modal-imagen.service';
 import { UsuarioService } from '../../../services/usuario.service';
+
+import { Producto } from '../../../models/producto.model';
 
 
 @Component({
@@ -19,7 +19,9 @@ import { UsuarioService } from '../../../services/usuario.service';
 export class ProductosComponent implements OnInit, OnDestroy{
 
   public totalCursos: number;
-  public cursos: Curso[] = [];
+  public productos: Producto[] = [];
+  public productosTemp: Producto[] = [];
+
   public desde: number = 0;
   public cargando: boolean = false;
   public imgSubs: Subscription;
@@ -28,7 +30,7 @@ export class ProductosComponent implements OnInit, OnDestroy{
 
   public seleccionForm: FormGroup;
 
-  constructor( private cursoService: CursoService,
+  constructor( private _productoService: ProductoService,
                private busquedasSrv: BusquedasService,
                private modalImagenSrv: ModalImagenService,
                private usuarioService: UsuarioService,
@@ -40,58 +42,61 @@ export class ProductosComponent implements OnInit, OnDestroy{
       nivel: [ '0', Validators.required ]
     });
 
+    this.cargarProductos();
+
     this.nivelUsuario = this.usuarioService.role;
   }
 
   ngOnDestroy(): void {
   }
 
-  cargarCursos(){
-    const jornada = this.seleccionForm.get('jornada').value;
-    const nivel = this.seleccionForm.get('nivel').value;
-    if(jornada>0 && nivel>0){
+  cargarProductos(){
+    // const jornada = this.seleccionForm.get('jornada').value;
+    // const nivel = this.seleccionForm.get('nivel').value;
+    // if(jornada>0 && nivel>0){
       this.cargando = true;
-      this.cursoService.cargarCursosFiltrados(jornada, nivel)
+      this._productoService.cargarProductos()
       .subscribe(
-        ({total, cursos}) =>{
-          this.totalCursos = total;
-          this.cursos = cursos;
+        ({total, productos}) =>{
+          this.productosTemp = productos;
+          this.productos = productos;
           this.cargando = false;
         }) 
-    }else{
-      this.cursos = [];
-    }
+    // }else{
+    //   this.cursos = [];
+    // }
   }
 
-  cambiarPagina( valor: number){
-    this.desde += valor;
+  // cambiarPagina( valor: number){
+  //   this.desde += valor;
 
-    if(this.desde < 0){
-      this.desde = 0
-    }else if(this.desde > this.totalCursos){
-      this.desde -= valor;
-    }
-    this.cargarCursos();
-  }
+  //   if(this.desde < 0){
+  //     this.desde = 0
+  //   }else if(this.desde > this.totalCursos){
+  //     this.desde -= valor;
+  //   }
+  //   this.cargarCursos();
+  // }
 
   cambiaJornada(){
-    this.seleccionForm.controls['nivel'].setValue(0);
-    this.cursos = [];
+    // this.seleccionForm.controls['nivel'].setValue(0);
+    // this.cursos = [];
   }
 
-  // buscar(termino: string){
+  buscar(termino: string){
 
-  //   if(termino.length === 0){
-  //     return this.cursos = this.cursosTemp;
-  //   }
+    if(termino.length === 0){
+      return this.productos = this.productosTemp;
+    }
 
-  //   this.busquedasSrv.buscar('usuarios', termino)
-  //     .subscribe(
-  //       (resp: Curso[]) => {
-  //         this.cursos = resp;
-  //       });
-  //     return true;
-  // }
+    this.busquedasSrv.buscar('productos', termino)
+      .subscribe(
+        (resp: Producto[]) => {
+          console.log(termino);
+          this.productos = resp;
+        });
+      return true;
+  }
 
   // eliminarUsuario(usuario: Usuario){
 

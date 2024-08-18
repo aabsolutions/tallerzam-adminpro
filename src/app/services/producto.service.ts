@@ -29,25 +29,27 @@ export class ProductoService {
     }
   }
 
-  // cargarProductos(desde: number = 0, limite: number = 0)
-  // {
-  //   const url = `${ base_url}/productos?from=${desde}&limit=${limite}`;
+  cargarProductos(desde: number = 0, limite: number = 0)
+  {
+    const url = `${ base_url}/productos?from=${desde}&limit=${limite}`;
 
-  //   return this.http.get<CargarProducto>(url, this.headers )
-  //     .pipe(
-  //       map( resp => {
-  //         const productos = resp.estudiantes.map(
-  //           //hay que tener presente el orden en el que se traen los datos desde el modelo
-  //           producto => new Producto(
-  //           )
-  //         );
-  //         return {
-  //           total: resp.total,
-  //           productos
-  //         };
-  //       })
-  //     )
-  // }
+    return this.http.get<CargarProducto>(url, this.headers )
+      .pipe(
+        map( resp => {
+          const productos = resp.productos.map(
+            //hay que tener presente el orden en el que se traen los datos desde el modelo
+            producto => new Producto(producto.matricula, producto.descripcion, producto.stock, producto.stock_minimo, producto.costo,
+              producto.precio, producto.unidad, producto.tipo_repuesto, producto.proveedor, producto._id, producto.codigo, producto.modelo, producto.marca, 
+              producto.procedencia, producto.img, producto.observacion, producto.usuario, producto.estado)
+          );
+          return {
+            total: resp.total,
+            productos
+          };
+          
+        })
+      )
+  }
 
   cargarProductoPorId( id: string )
   {

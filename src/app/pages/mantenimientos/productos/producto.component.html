@@ -154,7 +154,7 @@
                                         <input  type="text" 
                                                 class="form-control"
                                                 formControlName="precio">
-                                                <small class="form-control-feedback text-success"> Obligatorio. </small>
+                                                <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                     </div>
                                 </div>
                             </div>
@@ -191,8 +191,9 @@
 
 
                     </div>
-                    <hr>
-                    <div class="row">
+                    <hr *ngIf="usuarioRegistro">
+                    <div *ngIf="usuarioRegistro" class="row">
+                        
                         <div class="col-md-12">
                             <div class="row text-right">
                                 <div class="col-md-offset-3 col-md">

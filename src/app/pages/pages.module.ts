@@ -12,11 +12,13 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductoComponent } from './mantenimientos/productos/producto.component';
 import { RegistroComponent } from './mantenimientos/usuarios/registro.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { ProductosComponent } from './mantenimientos/productos/productos.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ProductoComponent,
+    ProductosComponent,
     RegistroComponent,
     UsuariosComponent,
     PagesComponent
