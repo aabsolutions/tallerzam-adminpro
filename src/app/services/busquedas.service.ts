@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from '../../environments/environment';
+
+import { Cliente } from '../models/cliente.model';
 import { Usuario } from '../models/usuario.model';
 import { Producto } from '../models/producto.model';
 
@@ -44,16 +46,21 @@ export class BusquedasService {
     );
   }
 
-
+  private transformarClientes( resultados: any[]): Cliente[]{
+    return resultados.map(
+      //hay que tener presente el orden en el que se traen los datos desde el modelo
+      cliente => new Cliente(cliente.tipo_cliente, cliente.cedula_ruc, cliente.apellidos_razon_social, cliente.nombres, cliente._id, cliente.ciudad,
+        cliente.direccion, cliente.email, cliente.celular, cliente.img, cliente.usuario, cliente.estado)
+    );
+  }
 
   
   buscarTodo(  termino: string){
-    console.log(termino);
     const url = `${base_url}/busqueda/${termino}`;
       return this.http.get(url, this.headers )
   }
 
-  buscar( tipo: 'usuarios'|'productos', termino: string){
+  buscar( tipo: 'usuarios'|'productos'|'clientes'|'servicios'|'empleados', termino: string){
     const url = `${base_url}/busqueda/${ tipo }/${termino}`;
     return this.http.get<any[]>(url, this.headers )
       .pipe( 
@@ -61,6 +68,8 @@ export class BusquedasService {
         //de los datos y que los datos vengan tal como se los requiere sin filtro en el backend
         map( (resp: any) => {
           switch (tipo) {
+            case 'clientes':
+                return this.transformarClientes(resp.data);
             case 'usuarios':
               return this.transformarUsuarios(resp.data);
             case 'productos':

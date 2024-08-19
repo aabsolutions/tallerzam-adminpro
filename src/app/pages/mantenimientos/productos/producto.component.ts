@@ -98,7 +98,7 @@ export class ProductoComponent implements OnInit {
           }
 
           this.productoSeleccionado = producto;
-          console.log(this.productoSeleccionado);
+
           this.productoForm.setValue({
             codigo: this.productoSeleccionado.codigo||'',
             costo: this.productoSeleccionado.costo||'',

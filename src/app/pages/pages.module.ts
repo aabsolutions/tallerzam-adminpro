@@ -13,9 +13,13 @@ import { ProductoComponent } from './mantenimientos/productos/producto.component
 import { RegistroComponent } from './mantenimientos/usuarios/registro.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 import { ProductosComponent } from './mantenimientos/productos/productos.component';
+import { ClienteComponent } from './mantenimientos/clientes/cliente.component';
+import { ClientesComponent } from './mantenimientos/clientes/clientes.component';
 
 @NgModule({
   declarations: [
+    ClienteComponent,
+    ClientesComponent,
     DashboardComponent,
     ProductoComponent,
     ProductosComponent,

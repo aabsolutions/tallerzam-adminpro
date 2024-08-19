@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-
 import { Producto } from '../models/producto.model';
-
 import { CargarProducto } from '../interfaces/producto.interface';
 
 const base_url = environment.base_url;
@@ -16,7 +14,6 @@ const base_url = environment.base_url;
 export class ProductoService {
 
   constructor(private http: HttpClient) { }
-  
   get token(): string{
     return localStorage.getItem('token') || '';
   }
@@ -32,7 +29,6 @@ export class ProductoService {
   cargarProductos(desde: number = 0, limite: number = 0)
   {
     const url = `${ base_url}/productos?from=${desde}&limit=${limite}`;
-
     return this.http.get<CargarProducto>(url, this.headers )
       .pipe(
         map( resp => {
@@ -60,15 +56,6 @@ export class ProductoService {
       )
   }
 
-  // cargarMatriculaEstudiante( id: string )
-  // {
-  //   const url = `${ base_url}/estudiantes/matricula/${ id }`;
-  //   return this.http.get(url, this.headers )
-  //     .pipe(
-  //       map( (resp: {ok: boolean, matricula: Matricula}) => resp.matricula[0] )   
-  //     )
-  // }
-
   crearProducto( producto: Producto )
   {
     const url = `${ base_url}/productos`;
@@ -80,24 +67,6 @@ export class ProductoService {
     const url = `${ base_url}/productos/${producto._id}`;
     return this.http.put(url, producto, this.headers );
   }
-
-  // asignarEstudianteCurso( idEstudiante: string, idCurso: string, idMatricula?:string)
-  // {
-  //   const url = `${ base_url}/estudiantes/asignacion/${idEstudiante}`;
-  //   return this.http.put(url, { curso: idCurso, matricula: idMatricula} , this.headers );
-  // }
-
-  // registroEstudianteImc( estudiante: string, periodo: string, peso: number, talla: number, fecha_toma: string)
-  // {
-  //   const url = `${ base_url}/estudiantes/imc/${estudiante}`;
-  //   return this.http.put(url, { periodo, peso, talla, fecha_toma } , this.headers );
-  // }
-
-  // eliminarCliente( _id: string )
-  // {
-  //   const url = `${ base_url}/clientes/${_id}`;
-  //   return this.http.delete(url, this.headers );
-  // }
 
 }
 
