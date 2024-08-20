@@ -15,12 +15,16 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { ProductosComponent } from './mantenimientos/productos/productos.component';
 import { ClienteComponent } from './mantenimientos/clientes/cliente.component';
 import { ClientesComponent } from './mantenimientos/clientes/clientes.component';
+import { EmpleadoComponent } from './mantenimientos/empleados/empleado.component';
+import { EmpleadosComponent } from './mantenimientos/empleados/empleados.component';
 
 @NgModule({
   declarations: [
     ClienteComponent,
     ClientesComponent,
     DashboardComponent,
+    EmpleadoComponent,
+    EmpleadosComponent,
     ProductoComponent,
     ProductosComponent,
     RegistroComponent,

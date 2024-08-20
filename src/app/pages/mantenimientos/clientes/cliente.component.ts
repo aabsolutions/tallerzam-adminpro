@@ -120,6 +120,8 @@ export class ClienteComponent implements OnInit {
         )
     }else{
 
+      console.log(this.clienteForm.value);
+
         this._clienteService.crearCliente(this.clienteForm.value)
         .subscribe(
           (resp: any) => {

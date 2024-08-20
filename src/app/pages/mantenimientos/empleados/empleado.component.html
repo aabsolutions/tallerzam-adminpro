@@ -1,0 +1,170 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card ">
+            <div class="card-body">
+                <h4 class="m-b-0 text-white">Datos de producto</h4>
+                <form class="form-horizontal p-t-20" 
+                      [formGroup]="empleadoForm"
+                      (submit)="guardarEmpleado()">
+                    <div class="form-body">
+                        <!--/section data-->
+                        <h3 class="box-title">Información general</h3>
+                        <hr class="m-t-0 m-b-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Tipo de empleado</label>
+                                    <div class="col-md-9">
+                                         <select class="form-control"
+                                                formControlName="tipo_empleado"
+                                                data-placeholder="--seleccione--">
+                                            <option value="">--seleccione--</option>
+                                            <option *ngFor="let tipo of tipos_empleado" value="{{tipo}}">{{tipo}}</option>
+                                        </select>
+                                        <small class="form-control-feedback text-danger"> Obligatorio. </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Cédula</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="cedula">
+                                        <small class="form-control-feedback text-danger"> Obligatorio. </small>
+                                        <span *ngIf="this.empleadoForm.get('cedula')?.errors?.['maxlength']||this.empleadoForm.get('cedula')?.errors?.['minlength']">
+                                            <small class="form-control-feedback text-danger"> 
+                                                Debe tener como mínimo 10 y máximo 13 caracteres
+                                            </small>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Apellidos</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="apellidos">
+                                                <small class="form-control-feedback text-danger"> Obligatorio. </small>
+                                        </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Nombres</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                        class="form-control"
+                                        formControlName="nombres">
+                                        <small class="form-control-feedback text-danger"> Obligatorio. </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Fecha de nacimiento</label>
+                                    <div class="col-md-9">
+                                        <input  type="date" 
+                                                class="form-control" 
+                                                placeholder="dd/mm/yyyy"
+                                                formControlName="f_nac">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/section data-->
+                        <h3 class="box-title">Información de contacto</h3>
+                        <hr class="m-t-0 m-b-40">
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Celular</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="celular">
+                                        <span *ngIf="this.empleadoForm.get('celular')?.errors?.['maxlength']||this.empleadoForm.get('celular')?.errors?.['minlength']">
+                                            <small class="form-control-feedback text-danger"> 
+                                                Debe tener 10 caracteres
+                                            </small>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Email</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="email">
+                                        <small class="form-control-feedback text-danger"> 
+                                            <span class="text-danger" *ngIf="this.empleadoForm.get('email')?.errors?.['email']">
+                                                El correo ingresado no es válido
+                                            </span>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Dirección</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="direccion">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                    </div>
+                    <hr *ngIf="usuarioRegistro">
+                    <div *ngIf="usuarioRegistro" class="row">
+                        
+                        <div class="col-md-12">
+                            <div class="row text-right">
+                                <div class="col-md-offset-3 col-md">
+                                    Última modificación por <span class="label label-danger">{{usuarioRegistro}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" 
+                                                class="btn btn-success mr-1"
+                                                [disabled]="empleadoForm.invalid">Guardar</button>
+                                        <button type="button" class="btn btn-inverse" onclick="reset()">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"> </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

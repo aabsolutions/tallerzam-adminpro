@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { Cliente } from '../models/cliente.model';
 import { Usuario } from '../models/usuario.model';
 import { Producto } from '../models/producto.model';
+import { Empleado } from '../models/empleado.model';
 
 const base_url = environment.base_url;
 
@@ -54,6 +55,13 @@ export class BusquedasService {
     );
   }
 
+  private transformarEmpleados( resultados: any[]): Empleado[]{
+    return resultados.map(
+      //hay que tener presente el orden en el que se traen los datos desde el modelo
+      empleado => new Empleado(empleado.cedula, empleado.apellidos, empleado.nombres, empleado.tipo_empleado, empleado.f_nac, empleado.celular, empleado.email, 
+        empleado.direccion, empleado._id, empleado.img, empleado.usuario, empleado.estado)
+    );
+  }
   
   buscarTodo(  termino: string){
     const url = `${base_url}/busqueda/${termino}`;
@@ -69,11 +77,13 @@ export class BusquedasService {
         map( (resp: any) => {
           switch (tipo) {
             case 'clientes':
-                return this.transformarClientes(resp.data);
+              return this.transformarClientes(resp.data);
+            case 'empleados':
+              return this.transformarEmpleados(resp.data);
             case 'usuarios':
               return this.transformarUsuarios(resp.data);
             case 'productos':
-                return this.transformarProductos(resp.data);
+              return this.transformarProductos(resp.data);
             default:
               return[];
           }
