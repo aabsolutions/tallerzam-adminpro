@@ -67,6 +67,26 @@ export class ClienteService {
     return this.http.put(url, cliente, this.headers );
   }
 
+  cargarTiposDeCliente(desde: number = 0, limite: number = 0)
+  {
+    const url = `${ base_url}/clientes/tipos`;
+    return this.http.get<CargarCliente>(url, this.headers )
+      .pipe(
+        map( resp => {
+          const clientes = resp.clientes.map(
+            //hay que tener presente el orden en el que se traen los datos desde el modelo
+            cliente => new Cliente(cliente.tipo_cliente, cliente.cedula_ruc, cliente.apellidos_razon_social, cliente.nombres, cliente._id, cliente.ciudad,
+              cliente.direccion, cliente.email, cliente.celular, cliente.img, cliente.usuario, cliente.estado)
+          );
+          return {
+            total: resp.total,
+            clientes
+          };
+          
+        })
+      )
+  }
+
 }
 
 
