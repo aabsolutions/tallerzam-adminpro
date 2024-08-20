@@ -5,6 +5,8 @@ import { map } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CargarEmpleado } from '../interfaces/empleado.interface';
 import { Empleado } from '../models/empleado.model';
+import { CargarTipoDeEmpleados } from '../interfaces/tipo-empleado.interface';
+import { TipoDeEmpleado } from '../models/tipo_empleado.model';
 
 const base_url = environment.base_url;
 
@@ -65,6 +67,27 @@ export class EmpleadoService {
   {
     const url = `${ base_url}/empleados/${empleado._id}`;
     return this.http.put(url, empleado, this.headers );
+  }
+
+  cargarTiposDeEmpleados()
+  {
+    const url = `${ base_url}/empleados/tipos`;
+    return this.http.get<CargarTipoDeEmpleados>(url, this.headers )
+      .pipe(
+        
+        map( resp => {
+          const tiposDeEmpleados = resp.tiposDeEmpleado.map(
+            //hay que tener presente el orden en el que se traen los datos desde el modelo
+            tipoDeEmpleado => new TipoDeEmpleado(tipoDeEmpleado.descripcion, tipoDeEmpleado._id, tipoDeEmpleado.usuario, tipoDeEmpleado.estado)
+          );
+          console.log(tiposDeEmpleados);
+          return {
+            total: resp.total,
+            tiposDeEmpleados
+          };
+          
+        })
+      )
   }
 
 }

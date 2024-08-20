@@ -19,7 +19,7 @@
                                                 formControlName="tipo_cliente"
                                                 data-placeholder="--seleccione--">
                                             <option value="">--seleccione--</option>
-                                            <option *ngFor="let tipo of tipos_clientes" value="{{tipo}}">{{tipo}}</option>
+                                            <option *ngFor="let tipo of tipos_clientes" value="{{tipo._id}}">{{tipo.descripcion}}</option>
                                         </select>
                                         <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                     </div>

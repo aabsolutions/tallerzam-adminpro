@@ -57,7 +57,7 @@
                         <tbody>
                             <tr *ngFor="let cliente of clientes; index as i">
                                 <td>{{i+1}}</td>
-                                <td>{{cliente.tipo_cliente}}</td>
+                                <td>{{cliente.tipo_cliente.descripcion}}</td>
                                 <td>{{cliente.cedula_ruc}}</td>
                                 <td>{{cliente.apellidos_razon_social}} {{cliente.nombres}}</td>
                                 <td>{{cliente.celular}}</td>

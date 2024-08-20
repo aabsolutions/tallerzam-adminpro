@@ -57,7 +57,7 @@
                         <tbody>
                             <tr *ngFor="let empleado of empleados; index as i">
                                 <td>{{i+1}}</td>
-                                <td>{{empleado.tipo_empleado}}</td>
+                                <td>{{empleado.tipo_empleado.descripcion}}</td>
                                 <td>{{empleado.cedula}}</td>
                                 <td>{{empleado.apellidos}} {{empleado.nombres}}</td>
                                 <td>{{empleado.celular}}</td>

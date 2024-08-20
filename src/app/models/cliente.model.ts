@@ -6,7 +6,7 @@ interface _ClienteUsuario{
 
 interface _ClienteTipo{
     _id: string,
-    nombre: string
+    descripcion: string
 }
 
 export class Cliente{

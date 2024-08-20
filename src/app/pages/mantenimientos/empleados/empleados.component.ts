@@ -56,6 +56,7 @@ export class EmpleadosComponent implements OnInit, OnDestroy{
       this._empleadoService.cargarEmpleados()
       .subscribe(
         ({total, empleados}) =>{
+          console.log(empleados);
           this.empleadosTemp = empleados;
           this.empleados = empleados;
           this.cargando = false;

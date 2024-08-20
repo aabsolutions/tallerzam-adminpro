@@ -4,12 +4,17 @@ interface _EmpleadoUsuario{
     img: string
 }
 
+interface _EmpleadoTipoEmpleado{
+    _id: string,
+    descripcion: string
+}
+
 export class Empleado{
     constructor(
         public cedula: string,
         public apellidos: string,
         public nombres: string,
-        public tipo_empleado: string,
+        public tipo_empleado: _EmpleadoTipoEmpleado,
         public f_nac?: string,
         public celular?: string,
         public email?: string,

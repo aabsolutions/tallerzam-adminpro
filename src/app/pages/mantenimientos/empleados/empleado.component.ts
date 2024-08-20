@@ -10,6 +10,7 @@ import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../models/cliente.model';
 import { EmpleadoService } from '../../../services/empleado.service';
 import { Empleado } from '../../../models/empleado.model';
+import { TipoDeEmpleado } from '../../../models/tipo_empleado.model';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class EmpleadoComponent implements OnInit {
   public imgSubs: Subscription;
   public usuarioRegistro: string;
 
-  public tipos_empleado : string[] = ['MAESTRO DE TALLER', 'AYUDANTE DE TALLER'];
+  public tipos_empleado : TipoDeEmpleado[];
 
 /* 
   public tipos_repuesto: any[] = 
@@ -70,7 +71,18 @@ export class EmpleadoComponent implements OnInit {
       email: ['',Validators.email],
       direccion: [''],
     });
+
+   this.cargarTiposDeEmpleados();
+
   }
+
+  cargarTiposDeEmpleados(){
+    this._empleadoService.cargarTiposDeEmpleados()
+    .subscribe(
+      ({tiposDeEmpleados}) =>{
+        this.tipos_empleado = tiposDeEmpleados;
+      }) 
+}
 
   cargarEmpleado( id: string ){
     if(id === 'nuevo'){

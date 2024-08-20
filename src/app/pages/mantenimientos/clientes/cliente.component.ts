@@ -8,6 +8,8 @@ import Swal from 'sweetalert2';
 import { ModalImagenService } from '../../../services/modal-imagen.service';
 import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../models/cliente.model';
+import { CargarTipoDeCliente } from '../../../interfaces/tipo-cliente.interface';
+import { TipoDeCliente } from '../../../models/tipo_cliente.model';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class ClienteComponent implements OnInit {
   public imgSubs: Subscription;
   public usuarioRegistro: string;
 
-  public tipos_clientes: string[] = ['PERSONA NATURAL', 'PERSONA JURIDICA'];
+  public tipos_clientes: TipoDeCliente[];
 
 /* 
   public tipos_repuesto: any[] = 
@@ -68,6 +70,17 @@ export class ClienteComponent implements OnInit {
       email: [''],
       celular: ['', Validators.required]
     });
+
+    this.cargarTiposDeCliente();
+
+  }
+
+  cargarTiposDeCliente(){
+      this._clienteService.cargarTiposDeCliente()
+      .subscribe(
+        ({tiposDeCliente}) =>{
+          this.tipos_clientes = tiposDeCliente;
+        }) 
   }
 
   cargarCliente( id: string ){

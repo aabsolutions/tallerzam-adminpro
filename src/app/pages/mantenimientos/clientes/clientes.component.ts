@@ -40,7 +40,7 @@ export class ClientesComponent implements OnInit, OnDestroy{
       nivel: [ '0', Validators.required ]
     });
 
-    this.cargarProductos();
+    this.cargarClientes();
 
     this.nivelUsuario = this._usuarioService.role;
   }
@@ -48,10 +48,7 @@ export class ClientesComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
   }
 
-  cargarProductos(){
-    // const jornada = this.seleccionForm.get('jornada').value;
-    // const nivel = this.seleccionForm.get('nivel').value;
-    // if(jornada>0 && nivel>0){
+  cargarClientes(){
       this.cargando = true;
       this._clienteService.cargarClientes()
       .subscribe(
@@ -60,9 +57,6 @@ export class ClientesComponent implements OnInit, OnDestroy{
           this.clientes = clientes;
           this.cargando = false;
         }) 
-    // }else{
-    //   this.cursos = [];
-    // }
   }
 
   // cambiarPagina( valor: number){
