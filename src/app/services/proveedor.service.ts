@@ -7,6 +7,8 @@ import { CargarEmpleado } from '../interfaces/empleado.interface';
 import { Empleado } from '../models/empleado.model';
 import { CargarTipoDeEmpleados } from '../interfaces/tipo-empleado.interface';
 import { TipoDeEmpleado } from '../models/tipo_empleado.model';
+import { CargarProveedor } from '../interfaces/proveedor.interface';
+import { Proveedor } from '../models/proveedor.model';
 
 const base_url = environment.base_url;
 
@@ -28,25 +30,26 @@ export class ProveedorService {
     }
   }
 
-  // cargarEmpleados(desde: number = 0, limite: number = 0)
-  // {
-  //   const url = `${ base_url}/empleados?from=${desde}&limit=${limite}`;
-  //   return this.http.get<CargarEmpleado>(url, this.headers )
-  //     .pipe(
-  //       map( resp => {
-  //         const empleados = resp.empleados.map(
-  //           //hay que tener presente el orden en el que se traen los datos desde el modelo
-  //           empleado => new Empleado(empleado.cedula, empleado.apellidos, empleado.nombres, empleado.tipo_empleado, empleado.f_nac, empleado.celular, empleado.email, 
-  //             empleado.direccion, empleado._id, empleado.img, empleado.usuario, empleado.estado)
-  //         );
-  //         return {
-  //           total: resp.total,
-  //           empleados
-  //         };
+  cargarProveedores(desde: number = 0, limite: number = 0)
+  {
+    const url = `${ base_url}/proveedores`;
+    return this.http.get<CargarProveedor>(url, this.headers )
+      .pipe(
+        map( resp => {
+          const proveedores = resp.proveedores.map(
+            //hay que tener presente el orden en el que se traen los datos desde el modelo
+            proveedor => new Proveedor(proveedor.ruc, proveedor.razon_social, proveedor.direccion, 
+              proveedor.email, proveedor.celular, proveedor.telefono, proveedor.ciudad, proveedor.usuario,
+            proveedor.estado, proveedor._id)
+          );
+          return {
+            total: resp.total,
+            proveedores
+          };
           
-  //       })
-  //     )
-  // }
+        })
+      )
+  }
 
   // cargarEmpleadoPorId( id: string )
   // {

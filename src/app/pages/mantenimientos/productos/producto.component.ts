@@ -10,6 +10,8 @@ import { ProductoService } from '../../../services/producto.service';
 
 import Swal from 'sweetalert2';
 import { TipoDeRepuesto } from '../../../models/tipo_repuesto.model';
+import { Proveedor } from '../../../models/proveedor.model';
+import { ProveedorService } from '../../../services/proveedor.service';
 
 @Component({
   selector: 'app-producto',
@@ -27,20 +29,11 @@ export class ProductoComponent implements OnInit {
 
   public tipos_repuesto: TipoDeRepuesto[];
   
-  public proveedores: any[] = 
-  [
-    {
-      id: '66bac42873a2a91304a46aa5',
-      razon_social: 'CHEVROLET ECUADOR S.A.'
-    },
-    {
-      id: '66bac5b23d965a7bddde4bb9',
-      razon_social: 'MAZDA ECUADOR S.A.'
-    }
-  ]
+  public proveedores: Proveedor[];
 
   constructor(private fb: FormBuilder,
               private _productoService: ProductoService,
+              private _proveedorService: ProveedorService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private modalImagenSrv: ModalImagenService){}
@@ -72,6 +65,8 @@ export class ProductoComponent implements OnInit {
     });
 
     this.cargarTiposDeRepuesto();
+    this.cargarProveedores();
+    
   }
 
   cargarProducto( id: string ){
@@ -116,7 +111,15 @@ export class ProductoComponent implements OnInit {
       ({tiposDeRepuesto}) =>{
         this.tipos_repuesto = tiposDeRepuesto;
       }) 
-}
+  }
+
+  cargarProveedores(){
+    this._proveedorService.cargarProveedores()
+    .subscribe(
+      ({proveedores}) =>{
+        this.proveedores = proveedores;
+      }) 
+  }
 
   guardarProducto(){
     if(this.productoSeleccionado){

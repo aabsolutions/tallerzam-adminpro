@@ -1,6 +1,6 @@
-import { Cliente } from "../models/cliente.model";
+import { Proveedor } from "../models/proveedor.model";
 
-export interface CargarCliente{
+export interface CargarProveedor{
     total: number;
-    clientes: Cliente[];
+    proveedores: Proveedor[];
 }

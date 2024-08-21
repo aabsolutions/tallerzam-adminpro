@@ -2,7 +2,6 @@
     <div class="col-lg-12">
         <div class="card ">
             <div class="card-body">
-                <h4 class="m-b-0 text-white">Datos de producto</h4>
                 <form class="form-horizontal p-t-20" 
                       [formGroup]="productoForm"
                       (submit)="guardarProducto()">
@@ -181,7 +180,7 @@
                                                 formControlName="proveedor"
                                                 data-placeholder="--seleccione--">
                                             <option value="">--seleccione--</option>
-                                            <option *ngFor="let proveedor of proveedores" value="{{proveedor.id}}">{{proveedor.razon_social}}</option>
+                                            <option *ngFor="let proveedor of proveedores" value="{{proveedor._id}}">{{proveedor.razon_social}}</option>
                                         </select>
                                         <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                     </div>
