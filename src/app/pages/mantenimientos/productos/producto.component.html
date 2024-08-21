@@ -61,7 +61,7 @@
                                                 formControlName="tipo_repuesto"
                                                 data-placeholder="--seleccione--">
                                             <option value="">--seleccione--</option>
-                                            <option *ngFor="let tipo of tipos_repuesto" value="{{tipo.id}}">{{tipo.descripcion}}</option>
+                                            <option *ngFor="let tipo of tipos_repuesto" value="{{tipo._id}}">{{tipo.descripcion}}</option>
                                         </select>
                                         <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                     </div>

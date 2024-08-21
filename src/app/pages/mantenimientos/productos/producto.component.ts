@@ -9,6 +9,7 @@ import { ModalImagenService } from '../../../services/modal-imagen.service';
 import { ProductoService } from '../../../services/producto.service';
 
 import Swal from 'sweetalert2';
+import { TipoDeRepuesto } from '../../../models/tipo_repuesto.model';
 
 @Component({
   selector: 'app-producto',
@@ -24,22 +25,7 @@ export class ProductoComponent implements OnInit {
   public imgSubs: Subscription;
   public usuarioRegistro: string;
 
-  public tipos_repuesto: any[] = 
-  [
-    {
-      id: '66bc1b94c5a6ba76068a81b3',
-      descripcion: 'REPUESTO MECÁNICO'
-    },
-    {
-      id: '66bc1ba1c5a6ba76068a81bd',
-      descripcion: 'REPUESTO ELÉCTRICO'
-    },
-    {
-      id: '66bc1ba9c5a6ba76068a81c1',
-      descripcion: 'REPUESTO ELECTRÓNICO'
-    }
-  ]
-
+  public tipos_repuesto: TipoDeRepuesto[];
   
   public proveedores: any[] = 
   [
@@ -84,6 +70,8 @@ export class ProductoComponent implements OnInit {
       tipo_repuesto: ['', Validators.required],
       unidad: ['', Validators.required]
     });
+
+    this.cargarTiposDeRepuesto();
   }
 
   cargarProducto( id: string ){
@@ -121,6 +109,14 @@ export class ProductoComponent implements OnInit {
         }
       )
   }
+
+  cargarTiposDeRepuesto(){
+    this._productoService.cargarTiposDeRepuesto()
+    .subscribe(
+      ({tiposDeRepuesto}) =>{
+        this.tipos_repuesto = tiposDeRepuesto;
+      }) 
+}
 
   guardarProducto(){
     if(this.productoSeleccionado){
