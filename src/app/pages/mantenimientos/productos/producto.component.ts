@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, delay } from 'rxjs';
+import { Subscription } from 'rxjs';
+
+import Swal from 'sweetalert2';
 
 import { Producto } from '../../../models/producto.model';
+import { Proveedor } from '../../../models/proveedor.model';
+import { TipoDeRepuesto } from '../../../models/tipo_repuesto.model';
 
 import { ModalImagenService } from '../../../services/modal-imagen.service';
 import { ProductoService } from '../../../services/producto.service';
-
-import Swal from 'sweetalert2';
-import { TipoDeRepuesto } from '../../../models/tipo_repuesto.model';
-import { Proveedor } from '../../../models/proveedor.model';
 import { ProveedorService } from '../../../services/proveedor.service';
+import { TipoService } from '../../../services/tipo.service';
 
 @Component({
   selector: 'app-producto',
@@ -22,18 +23,17 @@ import { ProveedorService } from '../../../services/proveedor.service';
 
 export class ProductoComponent implements OnInit {
 
+  public imgSubs: Subscription;
   public productoForm: FormGroup;
   public productoSeleccionado: Producto;
-  public imgSubs: Subscription;
-  public usuarioRegistro: string;
-
-  public tipos_repuesto: TipoDeRepuesto[];
-  
   public proveedores: Proveedor[];
+  public tipos_repuesto: TipoDeRepuesto[];
+  public usuarioRegistro: string;
 
   constructor(private fb: FormBuilder,
               private _productoService: ProductoService,
               private _proveedorService: ProveedorService,
+              private _tiposService: TipoService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private modalImagenSrv: ModalImagenService){}
@@ -64,9 +64,17 @@ export class ProductoComponent implements OnInit {
       unidad: ['', Validators.required]
     });
 
-    this.cargarTiposDeRepuesto();
+    this.cargarTipos('repuesto');
     this.cargarProveedores();
     
+  }
+
+  cargarTipos(path: string){
+    this._tiposService.cargarTipos(path)
+    .subscribe(
+      ({tipos}) =>{
+        this.tipos_repuesto = tipos;
+      }) 
   }
 
   cargarProducto( id: string ){
@@ -103,14 +111,6 @@ export class ProductoComponent implements OnInit {
           return true;
         }
       )
-  }
-
-  cargarTiposDeRepuesto(){
-    this._productoService.cargarTiposDeRepuesto()
-    .subscribe(
-      ({tiposDeRepuesto}) =>{
-        this.tipos_repuesto = tiposDeRepuesto;
-      }) 
   }
 
   cargarProveedores(){

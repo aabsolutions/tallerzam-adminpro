@@ -4,16 +4,16 @@ import { map } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
-import { CargarProveedor } from '../interfaces/proveedor.interface';
-
 import { Proveedor } from '../models/proveedor.model';
+import { CargarTipo } from '../interfaces/tipo.interface';
+import { Tipo } from '../models/tipo';
 
 const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProveedorService {
+export class TipoService {
 
   constructor(private http: HttpClient) { }
   get token(): string{
@@ -28,23 +28,20 @@ export class ProveedorService {
     }
   }
 
-  cargarProveedores(desde: number = 0, limite: number = 0)
+  cargarTipos(path: string)
   {
-    const url = `${ base_url}/proveedores`;
-    return this.http.get<CargarProveedor>(url, this.headers )
+    const url = `${ base_url }/tipos/${ path }`;
+    return this.http.get<CargarTipo>(url, this.headers )
       .pipe(
         map( resp => {
-          const proveedores = resp.proveedores.map(
+          const tipos = resp.data.map(
             //hay que tener presente el orden en el que se traen los datos desde el modelo
-            proveedor => new Proveedor(proveedor.ruc, proveedor.razon_social, proveedor.direccion, 
-              proveedor.email, proveedor.celular, proveedor.telefono, proveedor.ciudad, proveedor.usuario,
-            proveedor.estado, proveedor._id)
+            tipo => new Tipo(tipo.descripcion, tipo._id, tipo.usuario, tipo.estado)
           );
           return {
             total: resp.total,
-            proveedores
+            tipos
           };
-          
         })
       )
   }

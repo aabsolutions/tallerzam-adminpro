@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, delay } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import Swal from 'sweetalert2';
 
 import { ModalImagenService } from '../../../services/modal-imagen.service';
-import { ClienteService } from '../../../services/cliente.service';
-import { Cliente } from '../../../models/cliente.model';
 import { EmpleadoService } from '../../../services/empleado.service';
 import { Empleado } from '../../../models/empleado.model';
 import { TipoDeEmpleado } from '../../../models/tipo_empleado.model';
+import { TipoService } from '../../../services/tipo.service';
 
 
 @Component({
@@ -29,26 +28,9 @@ export class EmpleadoComponent implements OnInit {
 
   public tipos_empleado : TipoDeEmpleado[];
 
-/* 
-  public tipos_repuesto: any[] = 
-  [
-    {
-      id: '66bc1b94c5a6ba76068a81b3',
-      descripcion: 'REPUESTO MECÁNICO'
-    },
-    {
-      id: '66bc1ba1c5a6ba76068a81bd',
-      descripcion: 'REPUESTO ELÉCTRICO'
-    },
-    {
-      id: '66bc1ba9c5a6ba76068a81c1',
-      descripcion: 'REPUESTO ELECTRÓNICO'
-    }
-  ] */
-
-
   constructor(private fb: FormBuilder,
               private _empleadoService: EmpleadoService,
+              private _tiposService: TipoService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private modalImagenSrv: ModalImagenService){}
@@ -72,17 +54,18 @@ export class EmpleadoComponent implements OnInit {
       direccion: [''],
     });
 
-   this.cargarTiposDeEmpleados();
+   this.cargarTipos('empleado');
 
   }
 
-  cargarTiposDeEmpleados(){
-    this._empleadoService.cargarTiposDeEmpleados()
+  cargarTipos(path: string){
+    this._tiposService.cargarTipos(path)
     .subscribe(
-      ({tiposDeEmpleados}) =>{
-        this.tipos_empleado = tiposDeEmpleados;
+      ({tipos}) =>{
+        this.tipos_empleado = tipos;
       }) 
-}
+  }
+
 
   cargarEmpleado( id: string ){
     if(id === 'nuevo'){

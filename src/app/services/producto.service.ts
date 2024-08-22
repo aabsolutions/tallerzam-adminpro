@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 
 import { environment } from '../../environments/environment';
+
 import { Producto } from '../models/producto.model';
+
 import { CargarProducto } from '../interfaces/producto.interface';
-import { CargarTipoDeRepuesto } from '../interfaces/tipo-repuesto.interface';
-import { TipoDeCliente } from '../models/tipo_cliente.model';
 
 const base_url = environment.base_url;
 
@@ -35,7 +35,6 @@ export class ProductoService {
       .pipe(
         map( resp => {
           const productos = resp.productos.map(
-            //hay que tener presente el orden en el que se traen los datos desde el modelo
             producto => new Producto(producto.matricula, producto.descripcion, producto.stock, producto.stock_minimo, producto.costo,
               producto.precio, producto.unidad, producto.tipo_repuesto, producto.proveedor, producto._id, producto.codigo, producto.modelo, producto.marca, 
               producto.procedencia, producto.img, producto.observacion, producto.usuario, producto.estado)
@@ -68,24 +67,6 @@ export class ProductoService {
   {
     const url = `${ base_url}/productos/${producto._id}`;
     return this.http.put(url, producto, this.headers );
-  }
-
-  cargarTiposDeRepuesto()
-  {
-    const url = `${ base_url}/productos/tipos`;
-    return this.http.get<CargarTipoDeRepuesto>(url, this.headers )
-      .pipe(
-        map( resp => {
-          const tiposDeRepuesto = resp.tiposDeRepuesto.map(
-            //hay que tener presente el orden en el que se traen los datos desde el modelo
-            tipoDeRepuesto => new TipoDeCliente(tipoDeRepuesto.descripcion, tipoDeRepuesto._id, tipoDeRepuesto.usuario, tipoDeRepuesto.estado)
-          );
-          return {
-            total: resp.total,
-            tiposDeRepuesto
-          };
-        })
-      )
   }
 
 }

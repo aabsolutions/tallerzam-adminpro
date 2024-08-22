@@ -10,6 +10,7 @@ import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../models/cliente.model';
 import { CargarTipoDeCliente } from '../../../interfaces/tipo-cliente.interface';
 import { TipoDeCliente } from '../../../models/tipo_cliente.model';
+import { TipoService } from '../../../services/tipo.service';
 
 
 @Component({
@@ -28,26 +29,9 @@ export class ClienteComponent implements OnInit {
 
   public tipos_clientes: TipoDeCliente[];
 
-/* 
-  public tipos_repuesto: any[] = 
-  [
-    {
-      id: '66bc1b94c5a6ba76068a81b3',
-      descripcion: 'REPUESTO MECÁNICO'
-    },
-    {
-      id: '66bc1ba1c5a6ba76068a81bd',
-      descripcion: 'REPUESTO ELÉCTRICO'
-    },
-    {
-      id: '66bc1ba9c5a6ba76068a81c1',
-      descripcion: 'REPUESTO ELECTRÓNICO'
-    }
-  ] */
-
-
   constructor(private fb: FormBuilder,
               private _clienteService: ClienteService,
+              private _tiposService: TipoService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private modalImagenSrv: ModalImagenService){}
@@ -71,15 +55,15 @@ export class ClienteComponent implements OnInit {
       celular: ['', Validators.required]
     });
 
-    this.cargarTiposDeCliente();
+    this.cargarTipos('cliente');
 
   }
 
-  cargarTiposDeCliente(){
-      this._clienteService.cargarTiposDeCliente()
+  cargarTipos(path: string){
+      this._tiposService.cargarTipos(path)
       .subscribe(
-        ({tiposDeCliente}) =>{
-          this.tipos_clientes = tiposDeCliente;
+        ({tipos}) =>{
+          this.tipos_clientes = tipos;
         }) 
   }
 

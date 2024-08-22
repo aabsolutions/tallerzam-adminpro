@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 
 import { environment } from '../../environments/environment';
+
 import { CargarCliente } from '../interfaces/cliente.interface';
+
 import { Cliente } from '../models/cliente.model';
-import { CargarTipoDeCliente } from '../interfaces/tipo-cliente.interface';
-import { TipoDeCliente } from '../models/tipo_cliente.model';
 
 const base_url = environment.base_url;
 
@@ -35,7 +35,6 @@ export class ClienteService {
       .pipe(
         map( resp => {
           const clientes = resp.clientes.map(
-            //hay que tener presente el orden en el que se traen los datos desde el modelo
             cliente => new Cliente(cliente.tipo_cliente, cliente.cedula_ruc, cliente.apellidos_razon_social, cliente.nombres, cliente._id, cliente.ciudad,
               cliente.direccion, cliente.email, cliente.celular, cliente.img, cliente.usuario, cliente.estado)
           );
@@ -68,26 +67,6 @@ export class ClienteService {
     const url = `${ base_url}/clientes/${cliente._id}`;
     return this.http.put(url, cliente, this.headers );
   }
-
-  cargarTiposDeCliente()
-  {
-    const url = `${ base_url}/clientes/tipos`;
-    return this.http.get<CargarTipoDeCliente>(url, this.headers )
-      .pipe(
-        map( resp => {
-          const tiposDeCliente = resp.tiposDeCliente.map(
-            //hay que tener presente el orden en el que se traen los datos desde el modelo
-            tipoDecliente => new TipoDeCliente(tipoDecliente.descripcion,tipoDecliente._id, tipoDecliente.usuario, tipoDecliente.estado)
-          );
-          return {
-            total: resp.total,
-            tiposDeCliente
-          };
-          
-        })
-      )
-  }
-
 
 }
 
