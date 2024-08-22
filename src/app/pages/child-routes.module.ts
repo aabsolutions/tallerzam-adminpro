@@ -12,6 +12,8 @@ import { ClientesComponent } from './mantenimientos/clientes/clientes.component'
 import { ClienteComponent } from './mantenimientos/clientes/cliente.component';
 import { EmpleadosComponent } from './mantenimientos/empleados/empleados.component';
 import { EmpleadoComponent } from './mantenimientos/empleados/empleado.component';
+import { ProveedorComponent } from './mantenimientos/proveedores/proveedor.component';
+import { ProveedoresComponent } from './mantenimientos/proveedores/proveedores.component';
 
 const childRoutes: Routes = [
   { path:'', component: DashboardComponent, data: { principal: 'Personal', titulo: 'Dashboard' }, },
@@ -19,14 +21,18 @@ const childRoutes: Routes = [
   { path:'registro', canActivate: [AdminGuard], component: RegistroComponent, data: { principal: 'Personal', titulo: 'Registro de usuarios' } },
   { path:'usuarios', component: UsuariosComponent, data: { principal: 'Personal', titulo: 'Administración de usuarios' } },
 
+  
+  { path:'clientes/administracion', component: ClientesComponent, data: { principal: 'Clientes', titulo: 'Administración de clientes' } },
+  { path:'clientes/:id', canActivate: [AdminGuard], component: ClienteComponent, data: { principal: 'Clientes', titulo: 'Información de clientes' } },
+  
+  { path:'empleados/administracion', component: EmpleadosComponent, data: { principal: 'Empleados', titulo: 'Administración de empleados' } },
+  { path:'empleados/:id', canActivate: [AdminGuard], component: EmpleadoComponent, data: { principal: 'Empleados', titulo: 'Información de empleados' } },
+  
   { path:'productos/administracion', component: ProductosComponent, data: { principal: 'Productos', titulo: 'Administración de productos' } },
   { path:'productos/:id', canActivate: [AdminGuard], component: ProductoComponent, data: { principal: 'Productos', titulo: 'Información de producto' } },
 
-  { path:'clientes/administracion', component: ClientesComponent, data: { principal: 'Clientes', titulo: 'Administración de clientes' } },
-  { path:'clientes/:id', canActivate: [AdminGuard], component: ClienteComponent, data: { principal: 'Clientes', titulo: 'Información de clientes' } },
-
-  { path:'empleados/administracion', component: EmpleadosComponent, data: { principal: 'Empleados', titulo: 'Administración de empleados' } },
-  { path:'empleados/:id', canActivate: [AdminGuard], component: EmpleadoComponent, data: { principal: 'Empleados', titulo: 'Información de empleados' } },
+  { path:'proveedores/administracion', component: ProveedoresComponent, data: { principal: 'Proveedores', titulo: 'Administración de Proveedores' } },
+  { path:'proveedores/:id', canActivate: [AdminGuard], component: ProveedorComponent, data: { principal: 'Proveedores', titulo: 'Información de proveedor' } },
 
 ]
 

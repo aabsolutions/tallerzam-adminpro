@@ -17,6 +17,8 @@ import { ClienteComponent } from './mantenimientos/clientes/cliente.component';
 import { ClientesComponent } from './mantenimientos/clientes/clientes.component';
 import { EmpleadoComponent } from './mantenimientos/empleados/empleado.component';
 import { EmpleadosComponent } from './mantenimientos/empleados/empleados.component';
+import { ProveedorComponent } from './mantenimientos/proveedores/proveedor.component';
+import { ProveedoresComponent } from './mantenimientos/proveedores/proveedores.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { EmpleadosComponent } from './mantenimientos/empleados/empleados.compone
     EmpleadosComponent,
     ProductoComponent,
     ProductosComponent,
+    ProveedorComponent,
+    ProveedoresComponent,
     RegistroComponent,
     UsuariosComponent,
     PagesComponent

@@ -49,47 +49,26 @@ export class ProveedorService {
       )
   }
 
-  // cargarEmpleadoPorId( id: string )
-  // {
-  //   const url = `${ base_url}/empleados/${ id }`;
-  //   return this.http.get(url, this.headers )
-  //     .pipe(
-  //       map( (resp: {ok: boolean, empleado: Empleado}) => resp.empleado )   
-  //     )
-  // }
+  cargarProveedorPorId( id: string )
+  {
+    const url = `${ base_url}/proveedores/${ id }`;
+    return this.http.get(url, this.headers )
+      .pipe(
+        map( (resp: {ok: boolean, proveedor: Proveedor}) => resp.proveedor )   
+      )
+  }
 
-  // crearEmpleado( empleado: Empleado )
-  // {
-  //   const url = `${ base_url}/empleados`;
-  //   return this.http.post(url, empleado , this.headers );
-  // }
+  crearProveedor( proveedor: Proveedor )
+  {
+    const url = `${ base_url}/proveedores`;
+    return this.http.post(url, proveedor , this.headers );
+  }
 
-  // actualizarEmpleado( empleado: Empleado )
-  // {
-  //   const url = `${ base_url}/empleados/${empleado._id}`;
-  //   return this.http.put(url, empleado, this.headers );
-  // }
-
-  // cargarProveedoresLista()
-  // {
-  //   const url = `${ base_url}/proveedores`;
-  //   return this.http.get<CargarProveedores>(url, this.headers )
-  //     .pipe(
-        
-  //       map( resp => {
-  //         const tiposDeEmpleados = resp.tiposDeEmpleado.map(
-  //           //hay que tener presente el orden en el que se traen los datos desde el modelo
-  //           tipoDeEmpleado => new TipoDeEmpleado(tipoDeEmpleado.descripcion, tipoDeEmpleado._id, tipoDeEmpleado.usuario, tipoDeEmpleado.estado)
-  //         );
-  //         console.log(tiposDeEmpleados);
-  //         return {
-  //           total: resp.total,
-  //           tiposDeEmpleados
-  //         };
-          
-  //       })
-  //     )
-  // }
+  actualizarProveedor( proveedor: Proveedor )
+  {
+    const url = `${ base_url}/proveedores/${proveedor._id}`;
+    return this.http.put(url, proveedor, this.headers );
+  }
 
 }
 
