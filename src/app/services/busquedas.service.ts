@@ -8,6 +8,7 @@ import { Usuario } from '../models/usuario.model';
 import { Producto } from '../models/producto.model';
 import { Empleado } from '../models/empleado.model';
 import { Proveedor } from '../models/proveedor.model';
+import { Vehiculo } from '../models/vehiculo.model';
 
 const base_url = environment.base_url;
 
@@ -69,12 +70,20 @@ export class BusquedasService {
       );
     }
 
+    private transformarVehiculos( resultados: any[]): Vehiculo[]{
+      return resultados.map(
+        vehiculo => new Vehiculo(vehiculo.placa, vehiculo.vin, vehiculo.motor, vehiculo.modelo, vehiculo.propietario, vehiculo.tipo_vehiculo, vehiculo.anio,
+          vehiculo.ramv, vehiculo.marca, vehiculo.cilindraje, vehiculo.clase_vehiculo, vehiculo.origen, vehiculo.combustible, vehiculo.carroceria,
+          vehiculo.peso, vehiculo.tipo_peso, vehiculo.color, vehiculo.img, vehiculo.usuario, vehiculo.estado, vehiculo._id)
+      );
+    }
+
     buscarTodo(  termino: string){
     const url = `${base_url}/busqueda/${termino}`;
       return this.http.get(url, this.headers )
     }
 
-    buscar( tipo: 'clientes'|'servicios'|'empleados'|'productos'|'proveedores'|'usuarios', termino: string){
+    buscar( tipo: 'clientes'|'servicios'|'empleados'|'productos'|'proveedores'|'usuarios'|'vehiculos', termino: string){
       const url = `${base_url}/busqueda/${ tipo }/${termino}`;
       return this.http.get<any[]>(url, this.headers )
         .pipe( 
@@ -92,6 +101,8 @@ export class BusquedasService {
                   return this.transformarProveedores(resp.data);
               case 'usuarios':
                 return this.transformarUsuarios(resp.data);
+              case 'vehiculos':
+                return this.transformarVehiculos(resp.data);
               default:
                 return[];
             }

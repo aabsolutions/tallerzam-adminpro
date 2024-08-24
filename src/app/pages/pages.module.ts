@@ -19,6 +19,8 @@ import { EmpleadoComponent } from './mantenimientos/empleados/empleado.component
 import { EmpleadosComponent } from './mantenimientos/empleados/empleados.component';
 import { ProveedorComponent } from './mantenimientos/proveedores/proveedor.component';
 import { ProveedoresComponent } from './mantenimientos/proveedores/proveedores.component';
+import { VehiculoComponent } from './mantenimientos/vehiculos/vehiculo.component';
+import { VehiculosComponent } from './mantenimientos/vehiculos/vehiculos.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +29,15 @@ import { ProveedoresComponent } from './mantenimientos/proveedores/proveedores.c
     DashboardComponent,
     EmpleadoComponent,
     EmpleadosComponent,
+    PagesComponent,
     ProductoComponent,
     ProductosComponent,
     ProveedorComponent,
     ProveedoresComponent,
     RegistroComponent,
     UsuariosComponent,
-    PagesComponent
+    VehiculoComponent, 
+    VehiculosComponent
   ],
   exports: [
     DashboardComponent,

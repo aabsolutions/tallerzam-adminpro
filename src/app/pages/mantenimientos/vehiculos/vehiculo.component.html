@@ -1,0 +1,256 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card ">
+            <div class="card-body">
+                <form class="form-horizontal p-t-20" 
+                      [formGroup]="vehiculoForm"
+                      (submit)="guardarVehiculo()">
+                    <div class="form-body">
+                        <!--/section data-->
+                        <h3 class="box-title">Información obligatoria</h3>
+                        <hr class="m-t-0 m-b-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Placa</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="placa">
+                                         </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">VIN</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="vin">
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Motor</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="motor">
+                                         </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Modelo</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="modelo">
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Tipo de vehículo</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control"
+                                                formControlName="tipo_vehiculo"
+                                                data-placeholder="--seleccione--">
+                                            <option value="">--seleccione--</option>
+                                            <option *ngFor="let tipo of tipos_vehiculos" value="{{tipo._id}}">{{tipo.descripcion}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Propietario</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="propietario">
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <!--/section data-->
+                        <h3 class="box-title">Información adicional</h3>
+                        <hr class="m-t-0 m-b-40">
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Año</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="anio">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">RAMV</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="ramv">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Marca</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="marca">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Clase de vehículo</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="clase_vehiculo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Cilindraje</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="cilindraje">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Origen</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="origen">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Combustible</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="combustible">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Carrocería</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="carroceria">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Peso</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="peso">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Tipo de peso</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="tipo_peso">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Color</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" 
+                                                class="form-control"
+                                                formControlName="color">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                    </div>
+                    <hr *ngIf="usuarioRegistro">
+                    <div *ngIf="usuarioRegistro" class="row">
+                        
+                        <div class="col-md-12">
+                            <div class="row text-right">
+                                <div class="col-md-offset-3 col-md">
+                                    Última modificación por <span class="label label-danger">{{usuarioRegistro}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" 
+                                                class="btn btn-success mr-1"
+                                                [disabled]="vehiculoForm.invalid">Guardar</button>
+                                        <button type="button" class="btn btn-inverse" onclick="reset()">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"> </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

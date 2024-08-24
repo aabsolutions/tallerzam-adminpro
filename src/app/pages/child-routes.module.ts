@@ -14,6 +14,8 @@ import { EmpleadosComponent } from './mantenimientos/empleados/empleados.compone
 import { EmpleadoComponent } from './mantenimientos/empleados/empleado.component';
 import { ProveedorComponent } from './mantenimientos/proveedores/proveedor.component';
 import { ProveedoresComponent } from './mantenimientos/proveedores/proveedores.component';
+import { VehiculosComponent } from './mantenimientos/vehiculos/vehiculos.component';
+import { VehiculoComponent } from './mantenimientos/vehiculos/vehiculo.component';
 
 const childRoutes: Routes = [
   { path:'', component: DashboardComponent, data: { principal: 'Personal', titulo: 'Dashboard' }, },
@@ -31,9 +33,11 @@ const childRoutes: Routes = [
   { path:'productos/administracion', component: ProductosComponent, data: { principal: 'Productos', titulo: 'Administración de productos' } },
   { path:'productos/:id', canActivate: [AdminGuard], component: ProductoComponent, data: { principal: 'Productos', titulo: 'Información de producto' } },
 
-  { path:'proveedores/administracion', component: ProveedoresComponent, data: { principal: 'Proveedores', titulo: 'Administración de Proveedores' } },
+  { path:'proveedores/administracion', component: ProveedoresComponent, data: { principal: 'Proveedores', titulo: 'Administración de proveedores' } },
   { path:'proveedores/:id', canActivate: [AdminGuard], component: ProveedorComponent, data: { principal: 'Proveedores', titulo: 'Información de proveedor' } },
 
+  { path:'vehiculos/administracion', component: VehiculosComponent, data: { principal: 'Vehículos', titulo: 'Administración de vehículos' } },
+  { path:'vehiculos/:id', canActivate: [AdminGuard], component: VehiculoComponent, data: { principal: 'Vehículos', titulo: 'Información de vehículo' } },
 ]
 
 @NgModule({
