@@ -1,4 +1,4 @@
-import { Tipo } from "../models/tipo";
+import { Tipo } from "../models/tipo.model";
 
 export interface CargarTipo{
     total: number;

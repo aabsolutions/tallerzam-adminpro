@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { ModalImagenService } from '../../../services/modal-imagen.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { Vehiculo } from '../../../models/vehiculo.model';
-import { Tipo } from '../../../models/tipo';
+import { Tipo } from '../../../models/tipo.model';
 import { TipoService } from '../../../services/tipo.service';
 
 

@@ -21,6 +21,8 @@ import { ProveedorComponent } from './mantenimientos/proveedores/proveedor.compo
 import { ProveedoresComponent } from './mantenimientos/proveedores/proveedores.component';
 import { VehiculoComponent } from './mantenimientos/vehiculos/vehiculo.component';
 import { VehiculosComponent } from './mantenimientos/vehiculos/vehiculos.component';
+import { TipoComponent } from './mantenimientos/tipos/tipo.component';
+import { TiposComponent } from './mantenimientos/tipos/tipos.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { VehiculosComponent } from './mantenimientos/vehiculos/vehiculos.compone
     ProveedorComponent,
     ProveedoresComponent,
     RegistroComponent,
+    TipoComponent,
+    TiposComponent,
     UsuariosComponent,
     VehiculoComponent, 
     VehiculosComponent

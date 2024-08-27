@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 
 import { Proveedor } from '../models/proveedor.model';
 import { CargarTipo } from '../interfaces/tipo.interface';
-import { Tipo } from '../models/tipo';
+import { Tipo } from '../models/tipo.model';
 
 const base_url = environment.base_url;
 
@@ -46,26 +46,26 @@ export class TipoService {
       )
   }
 
-  // cargarEmpleadoPorId( id: string )
-  // {
-  //   const url = `${ base_url}/empleados/${ id }`;
-  //   return this.http.get(url, this.headers )
-  //     .pipe(
-  //       map( (resp: {ok: boolean, empleado: Empleado}) => resp.empleado )   
-  //     )
-  // }
+  cargarTipoPorId( id: string, path: string )
+  {
+    const url = `${ base_url}/tipos/${ path }/${ id }`;
+    return this.http.get(url, this.headers )
+      .pipe(
+        map( (resp: {ok: boolean, tipo: Tipo}) => resp.tipo )   
+      )
+  }
 
-  // crearEmpleado( empleado: Empleado )
-  // {
-  //   const url = `${ base_url}/empleados`;
-  //   return this.http.post(url, empleado , this.headers );
-  // }
+  crearTipo( tipo: Tipo, path: string )
+  {
+    const url = `${ base_url}/tipos/${path}`;
+    return this.http.post(url, tipo , this.headers );
+  }
 
-  // actualizarEmpleado( empleado: Empleado )
-  // {
-  //   const url = `${ base_url}/empleados/${empleado._id}`;
-  //   return this.http.put(url, empleado, this.headers );
-  // }
+  actualizarTipo( tipo: Tipo, path: string )
+  {
+    const url = `${ base_url}/empleados/${path}/${tipo._id}`;
+    return this.http.put(url, tipo, this.headers );
+  }
 
   // cargarProveedoresLista()
   // {

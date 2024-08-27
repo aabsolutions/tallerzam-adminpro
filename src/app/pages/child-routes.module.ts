@@ -16,6 +16,8 @@ import { ProveedorComponent } from './mantenimientos/proveedores/proveedor.compo
 import { ProveedoresComponent } from './mantenimientos/proveedores/proveedores.component';
 import { VehiculosComponent } from './mantenimientos/vehiculos/vehiculos.component';
 import { VehiculoComponent } from './mantenimientos/vehiculos/vehiculo.component';
+import { TiposComponent } from './mantenimientos/tipos/tipos.component';
+import { TipoComponent } from './mantenimientos/tipos/tipo.component';
 
 const childRoutes: Routes = [
   { path:'', component: DashboardComponent, data: { principal: 'Personal', titulo: 'Dashboard' }, },
@@ -35,6 +37,9 @@ const childRoutes: Routes = [
 
   { path:'proveedores/administracion', component: ProveedoresComponent, data: { principal: 'Proveedores', titulo: 'Administración de proveedores' } },
   { path:'proveedores/:id', canActivate: [AdminGuard], component: ProveedorComponent, data: { principal: 'Proveedores', titulo: 'Información de proveedor' } },
+
+  { path:'tipos/administracion', component: TiposComponent, data: { principal: 'Tipos', titulo: 'Administración de tipos' } },
+  { path:'tipos/:id', canActivate: [AdminGuard], component: TipoComponent, data: { principal: 'Tipos', titulo: 'Información de tipo' } },
 
   { path:'vehiculos/administracion', component: VehiculosComponent, data: { principal: 'Vehículos', titulo: 'Administración de vehículos' } },
   { path:'vehiculos/:id', canActivate: [AdminGuard], component: VehiculoComponent, data: { principal: 'Vehículos', titulo: 'Información de vehículo' } },
