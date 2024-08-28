@@ -8,8 +8,8 @@ import Swal from 'sweetalert2';
 import { ModalImagenService } from '../../../services/modal-imagen.service';
 import { EmpleadoService } from '../../../services/empleado.service';
 import { Empleado } from '../../../models/empleado.model';
-import { TipoDeEmpleado } from '../../../models/tipo_empleado.model';
 import { TipoService } from '../../../services/tipo.service';
+import { Tipo } from '../../../models/tipo.model';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class EmpleadoComponent implements OnInit {
   public imgSubs: Subscription;
   public usuarioRegistro: string;
 
-  public tipos_empleado : TipoDeEmpleado[];
+  public tipos_empleado : Tipo[];
 
   constructor(private fb: FormBuilder,
               private _empleadoService: EmpleadoService,

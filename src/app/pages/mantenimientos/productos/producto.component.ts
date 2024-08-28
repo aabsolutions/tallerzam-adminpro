@@ -7,12 +7,12 @@ import Swal from 'sweetalert2';
 
 import { Producto } from '../../../models/producto.model';
 import { Proveedor } from '../../../models/proveedor.model';
-import { TipoDeRepuesto } from '../../../models/tipo_repuesto.model';
 
 import { ModalImagenService } from '../../../services/modal-imagen.service';
 import { ProductoService } from '../../../services/producto.service';
 import { ProveedorService } from '../../../services/proveedor.service';
 import { TipoService } from '../../../services/tipo.service';
+import { Tipo } from '../../../models/tipo.model';
 
 @Component({
   selector: 'app-producto',
@@ -27,7 +27,7 @@ export class ProductoComponent implements OnInit {
   public productoForm: FormGroup;
   public productoSeleccionado: Producto;
   public proveedores: Proveedor[];
-  public tipos_repuesto: TipoDeRepuesto[];
+  public tipos_repuesto: Tipo[];
   public usuarioRegistro: string;
 
   constructor(private fb: FormBuilder,

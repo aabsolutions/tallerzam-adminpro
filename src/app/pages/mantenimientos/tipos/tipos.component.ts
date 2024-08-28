@@ -27,6 +27,7 @@ export class TiposComponent implements OnInit, OnDestroy{
   public nivelUsuario;
 
   public seleccionForm: FormGroup;
+  public tipoSeleccionado: string;
 
   constructor( private _tipoService: TipoService,
                private _busquedasSrv: BusquedasService,
@@ -36,8 +37,7 @@ export class TiposComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.seleccionForm = this.fb.group({
-      jornada: [ '0' , Validators.required ],
-      nivel: [ '0', Validators.required ]
+      tipo: [ 'cliente' , Validators.required ]
     });
 
     this.cargarTipos();
@@ -51,7 +51,10 @@ export class TiposComponent implements OnInit, OnDestroy{
   cargarTipos(){
       this.cargando = true;
 
-      this._tipoService.cargarTipos('empleado')
+      const path = this.seleccionForm.get('tipo').value;
+      this.tipoSeleccionado = this.seleccionForm.get('tipo').value;
+
+      this._tipoService.cargarTipos(path)
       .subscribe(
         ({total, tipos}) =>{
           this.tiposTemp = tipos;

@@ -12,13 +12,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Tipo de cliente</label>
+                                    <label class="control-label text-right col-md-3">Asignar tipo a</label>
                                     <div class="col-md-9">
                                          <select class="form-control"
                                                 formControlName="tipo"
                                                 data-placeholder="--seleccione--">
                                             <option value="">--seleccione--</option>
-                                            <!-- <option *ngFor="let tipo of tipo_tipos" value="{{tipo._id}}">{{tipo.descripcion}}</option> -->
+                                            <option *ngFor="let tipo of tipo_tipos" value="{{tipo.path}}">{{tipo.descripcion}}</option>
                                         </select>
                                         <small class="form-control-feedback text-danger"> Obligatorio. </small>
                                     </div>

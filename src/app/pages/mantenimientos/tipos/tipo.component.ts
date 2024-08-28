@@ -20,11 +20,33 @@ export class TipoComponent implements OnInit {
 
   public tipoForm: FormGroup;
   public tipoSeleccionado: Tipo;
+  public pathSeleccionado: string;
   public imgSubs: Subscription;
   public usuarioRegistro: string;
 
-  public tipo_tipos: Tipo[];
-
+  public tipo_tipos: any = [
+    {
+      path: 'cliente',
+      descripcion: 'Clientes'
+    },
+    {
+      path: 'empleado',
+      descripcion: 'Empleados'
+    },
+    {
+      path: 'repuesto',
+      descripcion: 'Repuestos'
+    },
+    {
+      path: 'servicio',
+      descripcion: 'Servicios'
+    },
+    {
+      path: 'vehiculo',
+      descripcion: 'Vehiculos'
+    }
+  ];  
+  
   constructor(private fb: FormBuilder,
               private _tipoService: TipoService,
               private _tiposService: TipoService,
@@ -34,14 +56,15 @@ export class TipoComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params
-        .subscribe( ({id}) => {
+        .subscribe( ({id, path}) => {
           if(id){
+            this.pathSeleccionado = path;
             this.cargarTipo(id);
           }
         } );
 
     this.tipoForm = this.fb.group({
-      tipo: ['', Validators.required],
+      tipo: [{value: '', disabled: false}, Validators.required],
       descripcion: ['', Validators.required],
     });
 
@@ -52,20 +75,15 @@ export class TipoComponent implements OnInit {
       return;
     }
 
-    const path = this.tipoForm.get('tipo').value;
-
-    this._tipoService.cargarTipoPorId(id, path)
+      this._tipoService.cargarTipoPorId(id, this.pathSeleccionado)
         .subscribe( (tipo: Tipo) => {
-          if( !tipo ){
-            return this.router.navigateByUrl(`/dashboard/tipos/administracion`);
-          }
-
           this.tipoSeleccionado = tipo;
-
           this.tipoForm.setValue({
             descripcion: this.tipoSeleccionado.descripcion||'',
+            tipo: this.pathSeleccionado||''
           });
           this.usuarioRegistro = this.tipoSeleccionado.usuario.nombre;
+          this.tipoForm.get('tipo').disable();
           return true;
         }
       )

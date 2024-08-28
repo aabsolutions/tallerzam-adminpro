@@ -39,7 +39,9 @@ const childRoutes: Routes = [
   { path:'proveedores/:id', canActivate: [AdminGuard], component: ProveedorComponent, data: { principal: 'Proveedores', titulo: 'Información de proveedor' } },
 
   { path:'tipos/administracion', component: TiposComponent, data: { principal: 'Tipos', titulo: 'Administración de tipos' } },
+  { path:'tipos/:path/:id', canActivate: [AdminGuard], component: TipoComponent, data: { principal: 'Tipos', titulo: 'Información de tipo' } },
   { path:'tipos/:id', canActivate: [AdminGuard], component: TipoComponent, data: { principal: 'Tipos', titulo: 'Información de tipo' } },
+
 
   { path:'vehiculos/administracion', component: VehiculosComponent, data: { principal: 'Vehículos', titulo: 'Administración de vehículos' } },
   { path:'vehiculos/:id', canActivate: [AdminGuard], component: VehiculoComponent, data: { principal: 'Vehículos', titulo: 'Información de vehículo' } },

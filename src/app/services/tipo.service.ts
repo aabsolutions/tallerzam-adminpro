@@ -53,6 +53,7 @@ export class TipoService {
       .pipe(
         map( (resp: {ok: boolean, tipo: Tipo}) => resp.tipo )   
       )
+      
   }
 
   crearTipo( tipo: Tipo, path: string )
@@ -63,7 +64,7 @@ export class TipoService {
 
   actualizarTipo( tipo: Tipo, path: string )
   {
-    const url = `${ base_url}/empleados/${path}/${tipo._id}`;
+    const url = `${ base_url}/tipos/${path}/${tipo._id}`;
     return this.http.put(url, tipo, this.headers );
   }
 

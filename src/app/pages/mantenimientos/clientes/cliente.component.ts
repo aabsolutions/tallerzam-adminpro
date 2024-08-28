@@ -8,9 +8,9 @@ import Swal from 'sweetalert2';
 import { ModalImagenService } from '../../../services/modal-imagen.service';
 import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../models/cliente.model';
-import { CargarTipoDeCliente } from '../../../interfaces/tipo-cliente.interface';
-import { TipoDeCliente } from '../../../models/tipo_cliente.model';
+
 import { TipoService } from '../../../services/tipo.service';
+import { Tipo } from '../../../models/tipo.model';
 
 
 @Component({
@@ -27,7 +27,7 @@ export class ClienteComponent implements OnInit {
   public imgSubs: Subscription;
   public usuarioRegistro: string;
 
-  public tipos_clientes: TipoDeCliente[];
+  public tipos_clientes: Tipo[];
 
   constructor(private fb: FormBuilder,
               private _clienteService: ClienteService,

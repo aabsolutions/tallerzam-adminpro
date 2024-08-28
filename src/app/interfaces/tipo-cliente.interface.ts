@@ -1,6 +1,6 @@
-import { TipoDeCliente } from "../models/tipo_cliente.model";
+import { Tipo } from "../models/tipo.model";
 
 export interface CargarTipoDeCliente{
     total: number;
-    tiposDeCliente: TipoDeCliente[];
+    tiposDeCliente: Tipo[];
 }

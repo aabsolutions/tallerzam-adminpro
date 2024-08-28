@@ -1,6 +1,6 @@
-import { TipoDeRepuesto } from "../models/tipo_repuesto.model";
+import { Tipo } from "../models/tipo.model";
 
 export interface CargarTipoDeRepuesto{
     total: number;
-    tiposDeRepuesto: TipoDeRepuesto[];
+    tiposDeRepuesto: Tipo[];
 }
