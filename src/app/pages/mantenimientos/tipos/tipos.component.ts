@@ -37,10 +37,8 @@ export class TiposComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.seleccionForm = this.fb.group({
-      tipo: [ 'cliente' , Validators.required ]
+      tipo: [ '' , Validators.required ]
     });
-
-    this.cargarTipos();
 
     this.nivelUsuario = this._usuarioService.role;
   }

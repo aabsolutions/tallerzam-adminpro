@@ -30,16 +30,16 @@
       [formGroup]="seleccionForm">
     <div class="row animated fadeIn fast">
         <div class="col-12">
-            <h6 class="card-subtitle mb-2">Filtros de búsqueda:</h6>    
+            <h6 class="card-subtitle mb-2">Mostrar tipo de:</h6>    
             <div class="form-group row">
                 
-                <div class="col-6">
+                <div class="col-3">
                     <div class="input-group">
                         <div class="input-group-addon">Tipo:</div>
                             <select class="form-control" 
                                 formControlName="tipo"
                                 (change)="cargarTipos()">
-                                <option selected value="0">--Seleccione--</option>
+                                <option selected value="">--Seleccione--</option>
                                 <option value="cliente">Clientes</option>
                                 <option value="empleado">Empleados</option>
                                 <option value="repuesto">Repuestos</option>
@@ -54,7 +54,7 @@
 </form>
 
 <div class="row" *ngIf="!cargando">
-    <div class="col-12">
+    <div class="col-6">
         <div class="card">
             <div class="card-body">
                 <div *ngIf="nivelUsuario=='ADMIN_ROLE'" class="row">
