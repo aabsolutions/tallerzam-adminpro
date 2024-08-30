@@ -35,7 +35,7 @@
                         <div class="text-right mb-3">
                             <a class="btn btn-primary"
                              routerLink="/dashboard/productos/nuevo">
-                                <i class="fa fa-hospital-o"></i>
+                                <i class="mdi mdi-store"></i>
                                 Crear Producto
                             </a>
                         </div>    
@@ -47,9 +47,8 @@
                             <tr>
                                 <th>N°</th>
                                 <th>Código</th>
-                                <th>Matrícula</th>
+                                <th>Descripción</th>
                                 <th>Tipo de repuesto</th>
-                                <th>Modelo</th>
                                 <th>Precio</th>
                                 <!-- <th>Orden</th> -->
                                 <th class="text-nowrap w100">Acciones</th>
@@ -59,9 +58,8 @@
                             <tr *ngFor="let producto of productos; index as i">
                                 <td>{{i+1}}</td>
                                 <td>{{producto.codigo}}</td>
-                                <td>{{producto.matricula}}</td>
+                                <td>{{producto.descripcion}}</td>
                                 <td>{{producto.tipo_repuesto.descripcion}}</td>
-                                <td>{{producto.modelo}}</td>
                                 <td>$ {{producto.precio}}</td>
                                 <td class="text-nowrap text-center">
                                     <a *ngIf="nivelUsuario=='ADMIN_ROLE'" [routerLink]="['/dashboard/productos/', producto._id]" 
@@ -74,7 +72,6 @@
                         </tbody>
                     </table>
                 </div>
-
                 <!-- <div *ngIf="txtBusqueda.value.length===0">
                     <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
                     &nbsp;
